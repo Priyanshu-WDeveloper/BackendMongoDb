@@ -14,3 +14,5 @@
 2025-05-09	18:22:14 	 d60841fd-3923-4f5a-a47c-4beef248aa89 	Error	 Not Allowed by CORS 
 2025-05-09	18:22:43 	 1001a7c1-3e22-4ddb-8abc-ca555e07797f 	Error	 Not Allowed by CORS 
 2025-05-09	18:22:52 	 77c4d951-cf6d-40e2-8ce9-1d47af98555f 	Error	 Not Allowed by CORS 
+2025-05-20	15:22:59 	 533d7236-7ded-4b06-9613-b91486f0d80c 	Error	 Not Allowed by CORS 
+2025-05-20	15:36:39 	 bdeeeda1-7a32-4ef9-a1ba-e3f529ec4f97 	Error	 Not Allowed by CORS 

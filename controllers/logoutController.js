@@ -13,7 +13,7 @@ const handleLogout = async (req, res) => {
   }
   findUser.username = "";
   const result = await findUser.save();
-  console.log(result);
+  // console.log(result);
 
   res.clearCookie("jwt", {
     httpOnly: true,

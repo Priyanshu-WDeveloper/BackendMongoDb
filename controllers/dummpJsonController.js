@@ -3,13 +3,13 @@ const axios = require("axios");
 const DUMMY_JSON_BASE_URL = "https://dummyjson.com";
 
 const proxyDummyJson = async (req, res) => {
-  console.log("paathhhhh", req.path);
+  // console.log("paathhhhh", req.path);
 
   try {
     // Extract the path after /api/dummy
 
     const path = req.path;
-    console.log("path", path);
+    // console.log("path", path);
 
     const queryString = Object.keys(req.query).length
       ? "?" + new URLSearchParams(req.query).toString()

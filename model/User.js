@@ -18,6 +18,6 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  refreshToken: String,
+  refreshToken: [String], // String is for single User but [String] is for multiple users/devices
 });
 module.exports = mongoose.model("User", userSchema);
