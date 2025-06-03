@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -8,7 +9,6 @@ const { error } = require("console");
 const corsOptions = require("./config/corsOptions");
 const verifyJWT = require("./middleware/verifyJWT");
 const cookieParser = require("cookie-parser");
-require("dotenv").config();
 const mongoose = require("mongoose");
 const connectDB = require("./config/dbConn");
 
@@ -36,7 +36,7 @@ app.use("/register", require("./routes/register"));
 app.use("/subdir", require("./routes/subdir"));
 app.use("/refresh", require("./routes/refresh"));
 app.use("/logout", require("./routes/logout"));
-app.use(verifyJWT);
+app.use(verifyJWT); // verify JWT token for all routes and also give them data??
 app.use("/employees", require("./routes/api/employees"));
 app.use("/users", require("./routes/api/users"));
 app.use("/followingUsers", require("./routes/api/followingUsers"));

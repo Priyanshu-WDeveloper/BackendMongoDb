@@ -28,12 +28,12 @@ const handleLogin = async (req, res) => {
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "15m" }
+      { expiresIn: "15sec" }
     );
     const newRefreshToken = jwt.sign(
       { username: findUser.username },
       process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: "1d" }
+      { expiresIn: "20sec" }
     );
     //* Saving refresh token with current user
     const existingTokens = Array.isArray(findUser.refreshToken)
@@ -45,7 +45,8 @@ const handleLogin = async (req, res) => {
     if (!cookies?.jwt) {
       newRefreshTokenArray = existingTokens;
     } else {
-      newRefreshTokenArray = existingTokens.filter((rt) => rt !== cookies.jwt);
+      newRefreshTokenArray =
+        existingTokens?.filter((rt) => rt !== cookies.jwt) || [];
     }
 
     // 🛡 Defensive programming: Ensure refreshToken is always an array
@@ -67,8 +68,12 @@ const handleLogin = async (req, res) => {
       const findToken = await User.findOne({ refreshToken }).exec();
       // Detected refresh token reuse!
       if (!findToken) {
+        // console.log(
+        //   `Detected refresh token reuse for user: ${findUser.username}`
+        // );
         // clear out all previous refresh tokens
         newRefreshTokenArray = [];
+        return res.sendStatus(401);
       }
       res.clearCookie("jwt", {
         httpOnly: true,
@@ -93,5 +98,7 @@ const handleLogin = async (req, res) => {
   } else {
     res.sendStatus(401);
   }
+  // console.log(`[LOGIN SUCCESS] User: ${user} @ ${new Date().toISOString()}`);
 };
+
 module.exports = { handleLogin };

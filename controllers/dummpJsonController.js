@@ -15,7 +15,7 @@ const proxyDummyJson = async (req, res) => {
       ? "?" + new URLSearchParams(req.query).toString()
       : "";
     const fullUrl = `${DUMMY_JSON_BASE_URL}${path}${queryString}`;
-    console.log(`Proxying request to: ${fullUrl}`);
+    // console.log(`Proxying request to: ${fullUrl}`);
 
     let requestConfig = {
       method: req.method,
