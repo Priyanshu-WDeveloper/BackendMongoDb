@@ -5,7 +5,8 @@ const { v4: uuid } = require("uuid");
 const { format } = require("date-fns"); //? it is main unless takes aload to load ??
 const logEvents = async (message, logName) => {
   // console.log("Logged");
-  const dateTime = `${format(new Date(), "yyyy-MM-dd\tHH:mm:ss")}`;
+  const dateTime = `${format(new Date(), "EEEE | MMMM,do yyyy\tHH:mm:ss")}`;
+  // const dateTime = `${format(new Date(), "yyyy-MM-dd\tHH:mm:ss")}`;
   // const dateTime = `${new Date()}`;
   const logItem = `${dateTime} \t ${uuid()} \t${message} \n`;
 

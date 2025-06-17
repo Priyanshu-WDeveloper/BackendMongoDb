@@ -1,5 +1,5 @@
 const axios = require("axios");
-const FollowingUser = require("../model/FollowingUser");
+const FollowingUser = require("../models/FollowingUser");
 
 const getFollowingUsers = async (req, res) => {
   try {
