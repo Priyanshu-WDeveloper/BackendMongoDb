@@ -8,6 +8,7 @@ const whitelist = [
   "https://ever-basket.vercel.app",
   "https://backendmongodb-s30u.onrender.com",
   "https://backendmongodb-s30u.onrender.com/",
+  "https://o4509439141412864.ingest.us.sentry.io/api/4509439158321152/envelope/?sentry_version=7&sentry_key=8b8792473ed68a3187a61fc7381f5cea&sentry_client=sentry.javascript.react%2F9.25.1",
 ];
 const corsOptions = {
   origin: (origin, callback) => {
