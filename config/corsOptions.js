@@ -1,11 +1,13 @@
 const whitelist = [
   // "http://localhost:3000",
   // "http://localhost:3500",
-  "http://localhost:5173",
-  "http://localhost:5174",
-  "http://localhost:5175",
+  // "http://localhost:5173",
+  // "http://localhost:5174",
+  // "http://localhost:5175",
   "https://ever-basket.vercel.app/",
   "https://ever-basket.vercel.app",
+  "https://backendmongodb-s30u.onrender.com",
+  "https://backendmongodb-s30u.onrender.com/",
 ];
 const corsOptions = {
   origin: (origin, callback) => {
