@@ -1,4 +1,5 @@
 const axios = require("axios");
+const ApiResponse = require("../utils/ApiResponse");
 
 const DUMMY_JSON_BASE_URL = "https://dummyjson.com";
 
@@ -34,7 +35,10 @@ const proxyDummyJson = async (req, res) => {
 
     const response = await axios(requestConfig);
     // Return the response data from DummyJSON
-    res.status(response.status).json(response.data);
+    // res.status(response.status).json(response.data);
+    res
+      .status(response.status)
+      .json(new ApiResponse(200, response.data, "Successfully fetched data"));
   } catch (error) {
     console.error("Error proxying request to DummyJSON:", error);
     // Handle error responses from DummyJSON and forward them
