@@ -15,7 +15,9 @@ const handleRefresh = asyncHandler(async (req, res) => {
   // console.log("cookie2", refreshToken);
   // res.clearCookie("jwt", { httpOnly: true, sameSite: "None", secure: true });
 
-  const findUser = await User.findOne({ refreshToken }).exec();
+  const findUser = await User.findOne({ refreshToken })
+    .select("+refreshToken")
+    .exec();
 
   if (!findUser) {
     // jwt.verify(
@@ -70,7 +72,6 @@ const handleRefresh = asyncHandler(async (req, res) => {
   );
 
   //evaluate jwt
-
   jwt.verify(
     refreshToken,
     process.env.REFRESH_TOKEN_SECRET,
@@ -79,9 +80,12 @@ const handleRefresh = asyncHandler(async (req, res) => {
         // return res.sendStatus(403);
         // expored refresh token
         findUser.refreshToken = [...newRefreshTokenArray];
-        const result = await findUser.save();
-
-        return res.sendStatus(403); //added here
+        await findUser.save();
+        throw new ApiError(
+          403,
+          "Detected refresh token reuse. Please login again."
+        );
+        // return res.sendStatus(403); //added here
       }
       // if (err || findUser.username !== decode.username) {
       if (!decode) {

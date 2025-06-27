@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const ApiError = require("../utils/ApiError");
 const asyncHandler = require("../utils/asyncHandler");
 const User = require("../models/user.model.js");
+const Role = require("../models/role.model.js");
 require("dotenv").config();
 
 const decodeToken = (token) => {
@@ -33,14 +34,16 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
   const token = authHeader.split(" ")[1];
   if (!token) throw new ApiError(401, "No token found");
   const decodedToken = decodeToken(token); // This will throw an error if token is invalid/expired
+  // console.log(decodedToken);
 
   // Handle both 'id' and '_id' for backward compatibility
   const userId = decodedToken?.id || decodedToken?._id;
-  console.log("userId in VerifyJWT", userId);
+  // console.log("userId in VerifyJWT", userId);
 
-  const user = await User.findById(userId).select("-password -refreshToken");
-  console.log("======== req.user in VerifyJWT ========");
-  console.log(req.user);
+  const user = await User.findById(userId).populate("roles").select("roles");
+  // .select(" +roles -password -refreshToken -__v");
+  console.log("======== req.user & roles in VerifyJWT ========");
+  console.log(req.user, req.roles);
   console.log("================================");
   console.log("======== user in VerifyJWT========");
   console.log(user);
@@ -50,11 +53,11 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
     throw new ApiError(401, "Invalid Access Token");
   }
 
-  req.user = user;
+  // req.user = user;
 
   // Extract roles from user and set them on req.roles
   const roles = Object.values(user.roles).filter(Boolean);
-  console.log(roles);
+  // console.log(roles);
 
   req.roles = roles;
 

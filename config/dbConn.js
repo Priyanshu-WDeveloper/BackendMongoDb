@@ -8,6 +8,7 @@ const connectDB = async () => {
   }
   try {
     await mongoose.connect(uri);
+
     // If you see deprecation warnings, consider uncommenting below:
     // await mongoose.connect(uri, {
     //   useUnifiedTopology: true,

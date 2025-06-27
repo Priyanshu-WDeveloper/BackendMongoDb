@@ -1,3 +1,13 @@
 .qodo
 .env
 node_modules
+logs
+logs/
+errLog.txt
+logs/errLog.txt
+reqLog.txt
+logs/reqLog.txt
+AllUsers.txt
+DeletedUser.txt
+updatedUser.txt
+UserById.txt

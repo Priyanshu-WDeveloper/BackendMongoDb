@@ -29,19 +29,32 @@ const userSchema = new Schema(
       type: String,
       trim: true,
     },
-    roles: {
-      User: {
-        type: Number,
-        default: 2001,
+    // roles: {
+    //   User: {
+    //     type: Number,
+    //     default: 2001,
+    //   },
+    //   Admin: Number,
+    //   Editor: Number,
+    // },
+    roles: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Role",
       },
-      Admin: Number,
-      Editor: Number,
-    },
+    ],
+
     password: {
       type: String,
       required: true,
+      select: false,
     },
-    refreshToken: [String], // String is for single User but [String] is for multiple users/devices
+    refreshToken: {
+      type: [String],
+      // default: [],
+      select: false,
+      index: true,
+    }, // String is for single User but [String] is for multiple users/devices
   },
   { timestamps: true }
 );
@@ -51,6 +64,7 @@ userSchema.index({ username: 1 }, { unique: true, sparse: true });
 userSchema.index({ email: 1 }, { unique: true, sparse: true });
 userSchema.index({ phone: 1 }, { unique: true, sparse: true });
 userSchema.index({ nationalNumber: 1 }, { unique: true, sparse: true });
+// userSchema.index({ refreshToken: 1 });
 
 // // Create a compound index for phone number uniqueness
 // userSchema.index(

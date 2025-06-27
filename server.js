@@ -38,6 +38,9 @@ app.use("/auth", require("./routes/auth.route.js"));
 app.use("/register", require("./routes/register.route.js"));
 app.use("/subdir", require("./routes/subdir"));
 app.use("/refresh", require("./routes/refresh"));
+app.use("/api/delivery", require("./routes/delivery.route.js"));
+app.use("/api/pincode-suggest", require("./routes/delivery.route.js"));
+
 app.use(verifyJWT); // verify JWT token for all routes and also give them data??
 app.use("/logout", require("./routes/logout.route.js"));
 app.use("/employees", require("./routes/api/employees"));

@@ -30,7 +30,6 @@ const getAllUsers = asyncHandler(async (req, res) => {
     );
   // .json(new ApiResponse(200, users, "Users Retrieved Successfully"));
 });
-
 const updateUser = asyncHandler(async (req, res) => {
   // console.log("UPDATE BODY", req.body);
   const { id } = req.params;
